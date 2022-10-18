@@ -14,14 +14,58 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-size: inherit;
+  line-height: 1.5em;
 }
 
 body {
   background-color: var(--seitenhintergrund);
   color: var(--schriftfarbe);
+  font-size: 16px;
 }
-
+header {
+  background-color: var(--schriftfarbe);
+  color: var(--seitenhintergrund);
+  padding: 1rem 2rem;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
+main{
+  padding: 2rem;
+}
+h3 {
+  font-size: 24px;
+  padding-bottom: 1rem;
+}
+
+.twowaynav {
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+}
+.twowaynav > a {
+  width: 48%;
+  max-width: 280px;
+  background: var(--akzentfarbe2);
+  border: 1px solid var(--akzentfarbe1);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 1.5rem 0;
+}
+.twowaynav > a:hover {
+  background: var(--akzentfarbe1);
+  color: var(--seitenhintergrund);
+}
+
+.offer-detail > h3 {
+  font-family: "Caveat", cursive;
+}
+.flat-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--akzentfarbe1);
+}
+.randomimage > img { width: 100%; } 

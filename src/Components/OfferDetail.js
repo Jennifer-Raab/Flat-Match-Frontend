@@ -88,7 +88,15 @@ function OfferDetail() {
               </tr>
             </tbody>
           </table>
-          <div>Beschreibung: {offer.description}</div>
+          <div>Beschreibung: {offer.description
+              .split("\n")
+              .reduce((children, textSegment, index) => {
+                return [
+                  ...children,
+                  index > 0 && <br key={index} />,
+                  textSegment,
+                ];
+              }, [])}</div>
         </div>
       )}
     </div>

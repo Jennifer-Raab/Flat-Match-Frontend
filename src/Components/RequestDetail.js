@@ -88,7 +88,15 @@ function RequestDetail() {
               </tr>
             </tbody>
           </table>
-          <div>Beschreibung: {request.description}</div>
+          <div>Beschreibung: {request.description
+              .split("\n")
+              .reduce((children, textSegment, index) => {
+                return [
+                  ...children,
+                  index > 0 && <br key={index} />,
+                  textSegment,
+                ];
+              }, [])}</div>
         </div>
       )}
     </div>
