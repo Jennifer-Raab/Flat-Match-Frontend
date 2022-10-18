@@ -35,9 +35,14 @@ a {
 main{
   padding: 2rem;
 }
-h3 {
+h1 {
   font-size: 24px;
   padding-bottom: 1rem;
+}
+th {
+  font-weight: normal;
+  text-align: left;
+  padding-right: 1rem;
 }
 
 .twowaynav {
@@ -60,8 +65,16 @@ h3 {
   color: var(--seitenhintergrund);
 }
 
-.offer-detail > h3 {
+.offer-detail h1 {
   font-family: "Caveat", cursive;
+}
+.offer-detail img {
+  Background: rgba(255, 255, 255, 0.1);
+  width: 600px;
+  height: 150px;
+}
+.offer-detail table + div { 
+  margin-top: 1rem;
 }
 .flat-card {
   padding: 1rem;
