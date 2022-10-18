@@ -14,22 +14,29 @@ function OfferDetail() {
       .then((response) => response.json())
       .then((data) => setOffer(data))
       .catch((err) => console.log(err));
-  }, [API]);
+  }, [API, id]);
 
   console.log(offer);
 
   return (
     <div className="offer-detail">
-      {/* {offer &&
-        offer.rows.map((offer) => {
-          return (
-            <div key={offer.id} className="flat-card">
-              <Link to={`/angebot/${offer.id}`}>
-                <p>{offer.title}</p>
-              </Link>
-            </div>
-          );
-        })} */}
+      {offer ? (
+  	    <>
+          <h3>{offer.title}</h3>
+          <p>{offer.description
+              .split("\n")
+              .reduce((children, textSegment, index) => {
+                return [
+                  ...children,
+                  index > 0 && <br key={index} />,
+                  textSegment,
+                ];
+              }, [])}</p>
+        </>
+      ) : (
+        "not found"
+      )
+    }
     </div>
   );
 }

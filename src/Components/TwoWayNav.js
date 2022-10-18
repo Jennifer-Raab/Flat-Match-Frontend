@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function TwoWayNav() {
   return (
-    <nav>
+    <nav className="twowaynav">
       <Link to="/angebote">Angebote</Link>
       <Link to="/gesuche">Gesuche</Link>
     </nav>
