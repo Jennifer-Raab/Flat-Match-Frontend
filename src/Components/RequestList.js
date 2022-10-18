@@ -18,7 +18,7 @@ function RequestList() {
   return (
     <div className="flat-list request">
       {requests &&
-        requests.rows.map((request) => {
+        requests.map((request) => {
           return (
             <div key={request.id} className="flat-card">
               <Link to={`/gesuch/${request.id}`}>
