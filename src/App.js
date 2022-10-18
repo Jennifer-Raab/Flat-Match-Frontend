@@ -5,7 +5,7 @@ import TwoWayNav from "./Components/TwoWayNav";
 import RequestList from "./Components/RequestList";
 import OfferList from "./Components/OfferList";
 import OfferDetail from "./Components/OfferDetail";
-// import RequestDetail from "./Components/RequestDetail";
+import RequestDetail from "./Components/RequestDetail";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path="/angebote" element={<OfferList />} />
           <Route path="/gesuche" element={<RequestList />} />
           <Route path="/angebot/:id" element={<OfferDetail />} />
-          {/* <Route path="/gesuch/:id" element={<RequestDetail />} /> */}
+          <Route path="/gesuch/:id" element={<RequestDetail />} />
         </Routes>
       </main>
     </div>
