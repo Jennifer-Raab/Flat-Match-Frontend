@@ -18,7 +18,7 @@ function OfferList() {
   return (
     <div className="flat-list offer">
       {offers &&
-        offers.rows.map((offer) => {
+        offers.map((offer) => {
           return (
             <div key={offer.id} className="flat-card">
               <Link to={`/angebot/${offer.id}`}>
