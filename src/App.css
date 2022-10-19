@@ -7,10 +7,14 @@
 }
 
 * {
+  font-family: "Jost", sans-serif;
   font-family: "Caveat", cursive;
   font-family: "Dancing Script", cursive;
   font-family: "Josefin Sans", sans-serif;
   font-family: "Nanum Gothic", sans-serif;
+  font-family: "Caveat", cursive;
+  font-family: "Inter", sans-serif;
+
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -32,7 +36,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
-main{
+main {
   padding: 2rem;
 }
 h1 {
@@ -69,11 +73,11 @@ th {
   font-family: "Caveat", cursive;
 }
 .offer-detail img {
-  Background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   width: 600px;
   height: 150px;
 }
-.offer-detail table + div { 
+.offer-detail table + div {
   margin-top: 1rem;
 }
 .flat-card {
@@ -81,4 +85,6 @@ th {
   margin-bottom: 1rem;
   border: 1px solid var(--akzentfarbe1);
 }
-.randomimage > img { width: 100%; } 
+.randomimage > img {
+  width: 100%;
+}
