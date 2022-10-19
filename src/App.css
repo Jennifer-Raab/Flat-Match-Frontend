@@ -65,7 +65,7 @@ th {
   color: var(--seitenhintergrund);
 }
 
-.offer-detail h1 {
+.offer-detail h1, .request-detail h1 {
   font-family: "Caveat", cursive;
 }
 .offer-detail img {
@@ -73,12 +73,20 @@ th {
   width: 600px;
   height: 150px;
 }
-.offer-detail table + div { 
+.offer-detail table + div, .request-detail table + div { 
   margin-top: 1rem;
 }
 .flat-card {
   padding: 1rem;
   margin-bottom: 1rem;
   border: 1px solid var(--akzentfarbe1);
+}
+.featurepoint {
+  display: inline-block;
+  padding: 0 0.4rem;
+  margin-right: 0.5rem;
+  background: var(--akzentfarbe2);
+  border-radius: 4px;
+  line-height: 1.3em;
 }
 .randomimage > img { width: 100%; } 

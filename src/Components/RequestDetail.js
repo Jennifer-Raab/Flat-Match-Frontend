@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { FormatHelper } from "./HelperFunctions";
 
 function RequestDetail() {
   const [request, setRequest] = useState();
@@ -43,16 +44,16 @@ function RequestDetail() {
               </tr>
               <tr>
                 <th>Miete:</th>
-                <td>{request.rent}</td>
+                <td>{FormatHelper("currency", request.rent)}</td>
               </tr>
               <tr>
                 <th>Kaution:</th>
-                <td>{request.deposit}</td>
+                <td>{FormatHelper("currency", request.deposit)}</td>
               </tr>
               <tr>
                 <th>Zeitraum:</th>
                 <td>
-                  {request.startdate} - {request.enddate}
+                  {FormatHelper("date", request.startdat)} - {FormatHelper("date", request.enddate)}
                 </td>
               </tr>
               <tr>
@@ -69,34 +70,26 @@ function RequestDetail() {
               </tr>
               <tr>
                 <th>Größe:</th>
-                <td>{request.size}</td>
+                <td>{FormatHelper("size", request.size)}</td>
               </tr>
               <tr>
                 {/* Hier müssen wir noch überlegen, wie wir die Punkte darstellen wollen. Alle darstellen und die zutreffenden mit einem Haken in der Checkbox oder mit Komma getrennt die zutreffenden? */}
                 <th>Lage:</th>
-                <td>{request.location}</td>
+                <td>{FormatHelper("array", request.location)}</td>
               </tr>
               <tr>
                 {/* Hier müssen wir noch überlegen, wie wir die Punkte darstellen wollen. Alle darstellen und die zutreffenden mit einem Haken in der Checkbox oder mit Komma getrennt die zutreffenden? */}
                 <th>Ausstattung:</th>
-                <td>{request.eqipment}</td>
+                <td>{FormatHelper("array", request.equipment)}</td>
               </tr>
               <tr>
                 {/* Hier müssen wir noch überlegen, wie wir die Punkte darstellen wollen. Alle darstellen und die zutreffenden mit einem Haken in der Checkbox oder mit Komma getrennt die zutreffenden? */}
                 <th>Wohnungstyp:</th>
-                <td>{request.accomodation_type}</td>
+                <td>{FormatHelper("array", request.accomodation_type)}</td>
               </tr>
             </tbody>
           </table>
-          <div>Beschreibung: {request.description
-              .split("\n")
-              .reduce((children, textSegment, index) => {
-                return [
-                  ...children,
-                  index > 0 && <br key={index} />,
-                  textSegment,
-                ];
-              }, [])}</div>
+          <div>Beschreibung: {FormatHelper("linebreak", request.description)}</div>
         </div>
       )}
     </div>
