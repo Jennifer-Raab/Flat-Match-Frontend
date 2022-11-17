@@ -14,6 +14,7 @@
   font-family: "Nanum Gothic", sans-serif;
   font-family: "Caveat", cursive;
   font-family: "Inter", sans-serif;
+  font-weight: 200;
 
   padding: 0;
   margin: 0;
@@ -44,7 +45,7 @@ h1 {
   padding-bottom: 1rem;
 }
 th {
-  font-weight: normal;
+  font-weight: inherit;
   text-align: left;
   padding-right: 1rem;
 }
@@ -71,9 +72,10 @@ th {
 
 .offer-detail h1, .request-detail h1 {
   font-family: "Caveat", cursive;
+  font-weight: 300;
 }
 .offer-detail img {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--akzentfarbe3);
   width: 600px;
   height: 150px;
 }
@@ -82,7 +84,7 @@ th {
 }
 .flat-card {
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   border: 1px solid var(--akzentfarbe1);
 }
 .featurepoint {
@@ -96,3 +98,77 @@ th {
 .randomimage > img {
   width: 100%;
 }
+sup {
+  font-size: 0.6rem;
+  line-height: 1em;
+}
+
+/* Filter Formular Einblendung  */
+fieldset {
+  border: 1px solid var(--akzentfarbe3);
+  margin: 0.5rem 0;
+}
+.filter-div {
+  margin: 0 auto;
+  max-width: 500px; 
+}
+.hid-checkb {
+  position: absolute;
+  left: -9999px;
+}
+.button-style { 
+  background: var(--akzentfarbe2);
+  border: 1px solid var(--akzentfarbe1);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0.8rem 0;
+  display: block;
+  color: var(--schriftfarbe);
+  width: 100%;
+}
+.button-style:hover {
+  background: var(--akzentfarbe1);
+  color: var(--seitenhintergrund);
+}
+.hid-checkb ~ .filter-form { 
+  max-height: 0; 
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+.filter-form label, .filter-form input { 
+  display: inline-block;
+}
+.filter-form label { 
+  width: 40%;
+}
+.filter-form input { 
+  width: 60%;
+  padding-left: 0.5rem;
+  background: var(--schriftfarbe);
+  color: var(--seitenhintergrund);
+  border: 1px solid var(--akzentfarbe3);
+}
+.filter-form > fieldset {
+  padding: 0 0 1rem 0;
+}
+.filter-form > fieldset > div {
+  padding: 1rem 1rem 0 1rem
+}
+.hid-checkb:checked ~ .filter-form { max-height: 350px; }
+
+
+
+
+@media only screen and (max-width: 480px) {
+  .filter-form label, .filter-form input { 
+    display: block;
+  }
+  .filter-form label { 
+    width: 100%;
+  }
+  .filter-form input { 
+    width: 100%;
+  }
+}
+
