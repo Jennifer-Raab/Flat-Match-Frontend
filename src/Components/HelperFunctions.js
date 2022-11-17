@@ -1,3 +1,10 @@
+/**
+ * Returns value from database formatted for output
+ *
+ * @param {string} format the desired format. Possible vales are date, currency, size, linebreak and array
+ * @param {string} input the string as it comes from the database
+ * @return {string} output the transformed string is returned
+ */
 export function FormatHelper(format, input) {
     let output = "";
     switch (format) {
@@ -5,19 +12,13 @@ export function FormatHelper(format, input) {
             let dte = new Date(Date.parse(input));
             let M =	dte.getMonth() + 1;
 	        let d =	dte.getDate();
-	        if (d <= 9) {
-		        d =	"0" + d;
-	        }
-            if (M <= 9) {
-		        M =	"0" + M;
-	        }
-            output = d + "." + M + "." + dte.getFullYear();
+            output = d.toString().padStart(2, "0") + "." + M.toString().padStart(2, "0") + "." + dte.getFullYear();
             break;
         case "currency":
             output = "€ " + input.toFixed(2).replace(".", ",");
             break;
         case "size":
-            output = input + " m<sup>2</sup>";
+            output = <>{input} m<sup>2</sup> </>;
             break;
         case "linebreak":
             output = input.split("\n").reduce((children, textSegment, index) => {
@@ -29,9 +30,9 @@ export function FormatHelper(format, input) {
             }, []);
             break;
         case "array":
-            output = input.map((point) => {
+            output = input.map((point, index) => {
                 return (
-                  <span className="featurepoint">{point}</span>
+                  <span className="featurepoint" key={`featurepoint_${index}`}>{point}</span>
                 );
               }
             );

@@ -53,7 +53,7 @@ function RequestDetail() {
               <tr>
                 <th>Zeitraum:</th>
                 <td>
-                  {FormatHelper("date", request.startdat)} - {FormatHelper("date", request.enddate)}
+                  {FormatHelper("date", request.startdate)} - {FormatHelper("date", request.enddate)}
                 </td>
               </tr>
               <tr>

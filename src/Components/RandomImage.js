@@ -30,7 +30,8 @@ export default function RandomImage() {
         console.log("Random", randnum);
         setRandomImage(images[randnum]);
     }, [location.pathname]);
-    if ((location.pathname.indexOf("gesuch/") === -1) || (location.pathname.indexOf("angebot/") === -1)) {
+    console.log(location);
+    if (!location.pathname.includes("gesuch/") && !location.pathname.includes("angebot/")) {
       return (
         <div className="randomimage">
           <img src={randomImage} alt="" />

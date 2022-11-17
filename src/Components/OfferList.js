@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import FilterForm from "./FilterForm";
 
 function OfferList() {
   const [offers, setOffers] = useState();
@@ -16,6 +17,8 @@ function OfferList() {
   console.log(offers);
 
   return (
+    <>
+    <FilterForm type="offer" />
     <div className="flat-list offer">
       {offers &&
         offers.map((offer) => {
@@ -28,6 +31,8 @@ function OfferList() {
           );
         })}
     </div>
+    
+    </>
   );
 }
 export default OfferList;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import FilterForm from "./FilterForm";
 
 function RequestList() {
   const [requests, setRequests] = useState();
@@ -16,6 +17,8 @@ function RequestList() {
   console.log(requests);
 
   return (
+    <>
+    <FilterForm type="request" />
     <div className="flat-list request">
       {requests &&
         requests.map((request) => {
@@ -28,6 +31,7 @@ function RequestList() {
           );
         })}
     </div>
+    </>
   );
 }
 export default RequestList;
