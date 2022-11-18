@@ -1,8 +1,27 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FormatHelper } from "./HelperFunctions";
+import { client } from "./client";
 
 function OfferDetail() {
+
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    client
+      .getEntries({
+        content_type: 'flatMatchBildgalerie',
+      })
+      .then((response) => setImages(response.items))
+      .catch(console.error);
+  }, []);
+
+  console.log("Images in App", images);
+
+
+
+
+
+
   const [offer, setOffer] = useState();
   const { id } = useParams();
 
