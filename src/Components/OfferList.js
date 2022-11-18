@@ -18,7 +18,7 @@ function OfferList() {
 
   return (
     <>
-    <FilterForm type="offer" />
+    <FilterForm param={{type:"offer"}} setContent={setOffers} />
     <div className="flat-list offer">
       {offers &&
         offers.map((offer) => {
