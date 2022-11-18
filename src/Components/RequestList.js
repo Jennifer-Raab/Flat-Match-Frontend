@@ -18,7 +18,7 @@ function RequestList() {
 
   return (
     <>
-    <FilterForm type="request" />
+    <FilterForm param={{type: "request"}} setContent={setRequests} />
     <div className="flat-list request">
       {requests &&
         requests.map((request) => {

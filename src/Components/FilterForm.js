@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { searchAnnouncements } from "../utils/dbUtils";
 
-function FilterForm(param) {
-
+function FilterForm({param, setContent}) {
+console.log("setContent", setContent)
     const [{ city, numberOfPersons, rent, type }, setFormState] = useState({
         city: "",
         numberOfPersons: "",
@@ -21,9 +22,9 @@ function FilterForm(param) {
             "type": type,
         });
         console.log("formDataJson", formDataJson);
-          //const  {content}  = await updateUser(formDataJson);
-         // console.log("returnDataJson", content);
-         // setUser(content);
+        const  content  = await searchAnnouncements(formDataJson);
+         console.log("returnDataJson", content);
+         setContent(content);
         } catch (error) {
           console.log(error.message);
         }
