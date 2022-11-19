@@ -1,10 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FormatHelper } from "./HelperFunctions";
+import Slideshow from "./SlideShow";
+import { client } from "./client";
 
 function RequestDetail() {
   const [request, setRequest] = useState();
+  const [images, setImages] = useState([]);
   const { id } = useParams();
+
+  useEffect(() => {
+    client
+      .getEntries({
+        content_type: "flatMatchBildgalerie",
+      })
+      .then((response) => setImages(response.items[id - 1]))
+      .catch(console.error);
+  }, [id]);
 
   console.log("id:", id);
 
@@ -24,14 +36,8 @@ function RequestDetail() {
       {request && (
         <div>
           <h1>{request.title}</h1>
-          {/* Hier auf alle Bilder zugreifen und eventuell einen slider oä einführen */}
-          <div>
-            <img
-              className="request-pictures"
-              src={request.images}
-              alt={request.title}
-            />
-          </div>
+          <Slideshow images={images} />
+
           <table>
             <tbody>
               <tr>
@@ -53,7 +59,8 @@ function RequestDetail() {
               <tr>
                 <th>Zeitraum:</th>
                 <td>
-                  {FormatHelper("date", request.startdate)} - {FormatHelper("date", request.enddate)}
+                  {FormatHelper("date", request.startdate)} -{" "}
+                  {FormatHelper("date", request.enddate)}
                 </td>
               </tr>
               <tr>
@@ -89,7 +96,9 @@ function RequestDetail() {
               </tr>
             </tbody>
           </table>
-          <div>Beschreibung: {FormatHelper("linebreak", request.description)}</div>
+          <div>
+            Beschreibung: {FormatHelper("linebreak", request.description)}
+          </div>
         </div>
       )}
     </div>

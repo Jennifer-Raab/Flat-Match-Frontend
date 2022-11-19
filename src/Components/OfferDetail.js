@@ -2,30 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FormatHelper } from "./HelperFunctions";
 import { client } from "./client";
+import Slideshow from "./SlideShow";
 
 function OfferDetail() {
-
   const [images, setImages] = useState([]);
-  
+
   const [offer, setOffer] = useState();
   const { id } = useParams();
 
   useEffect(() => {
     client
       .getEntries({
-        content_type: 'flatMatchBildgalerie',
+        content_type: "flatMatchBildgalerie",
       })
       .then((response) => setImages(response.items[id - 1]))
       .catch(console.error);
   }, [id]);
 
   console.log("Images in App", images);
-
-
-
-
-
-
 
   console.log("id:", id);
 
@@ -45,33 +39,8 @@ function OfferDetail() {
       {offer && (
         <div>
           <h1>{offer.title}</h1>
-          {/* Hier auf alle Bilder zugreifen und eventuell einen slider oä einführen
-          <div>
-            <img
-              className="offer-pictures"
-              src={offer.images}
-              alt={offer.title}
-            />
-          </div> */}
 
-          <div className="image-silder">
-            {images.fields.bilder.length &&
-              images.fields.bilder.map((image) => {
-                console.log("Image", image);
-
-                return (
-                  <div key={image.sys.id} className="silder-image">
-                      <img
-                         className="silder-picture"
-                        src={image.fields.file.url}
-                        alt={image.fields.title}
-                      />
-                      <p>{image.fields.title}</p>
-                  </div>
-                );
-              })}
-          </div>
-
+          <Slideshow images={images} />
 
           <table>
             <tbody>
@@ -94,7 +63,8 @@ function OfferDetail() {
               <tr>
                 <th>Zeitraum:</th>
                 <td>
-                  {FormatHelper("date", offer.startdate)} - {FormatHelper("date", offer.enddate)}
+                  {FormatHelper("date", offer.startdate)} -{" "}
+                  {FormatHelper("date", offer.enddate)}
                 </td>
               </tr>
               <tr>
@@ -130,7 +100,9 @@ function OfferDetail() {
               </tr>
             </tbody>
           </table>
-          <div>Beschreibung: {FormatHelper("linebreak", offer.description)}</div>
+          <div>
+            Beschreibung: {FormatHelper("linebreak", offer.description)}
+          </div>
         </div>
       )}
     </div>
