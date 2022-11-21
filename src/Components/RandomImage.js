@@ -23,14 +23,11 @@ export default function RandomImage() {
     
     const [randomImage, setRandomImage] = useState();
     const location = useLocation();
-    console.log(location.pathname);
 
     useEffect(() => {
         let randnum = Math.floor(Math.random() * 7);
-        console.log("Random", randnum);
         setRandomImage(images[randnum]);
     }, [location.pathname]);
-    console.log(location);
     if (!location.pathname.includes("gesuch/") && !location.pathname.includes("angebot/")) {
       return (
         <div className="randomimage">
