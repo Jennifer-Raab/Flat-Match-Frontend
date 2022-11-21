@@ -14,12 +14,12 @@
   font-family: "Nanum Gothic", sans-serif;
   font-family: "Caveat", cursive;
   font-family: "Inter", sans-serif;
-  font-weight: 200;
 
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-size: inherit;
+  font-weight: inherit;
   line-height: 1.5em;
 }
 
@@ -27,11 +27,14 @@ body {
   background-color: var(--seitenhintergrund);
   color: var(--schriftfarbe);
   font-size: 16px;
+  font-weight: 200;
 }
 header {
   background-color: var(--schriftfarbe);
   color: var(--seitenhintergrund);
   padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
 }
 a {
   color: inherit;
@@ -49,7 +52,23 @@ th {
   text-align: left;
   padding-right: 1rem;
 }
+header > nav { 
+  display: flex;
+  gap: 1rem;
+  font-weight: 400;
+  align-items: flex-start;
+ }
+ header > nav > * {  
+  background:  var(--akzentfarbe1);
+  border: 1px solid var(--akzentfarbe2);
+  color: var(--schriftfarbe);
+  padding: 0.2rem 1rem;
+  border-radius: 0.4rem;
+}
 
+header > nav > *:hover {
+  background:  var(--akzentfarbe2);
+ }
 .twowaynav {
   display: flex;
   column-gap: 1rem;
@@ -64,6 +83,7 @@ th {
   font-size: 1.5rem;
   font-weight: 500;
   padding: 1.5rem 0;
+  border-radius: 0.4rem;
 }
 .twowaynav > a:hover {
   background: var(--akzentfarbe1);
@@ -85,6 +105,7 @@ th {
   padding: 1rem;
   margin-top: 1rem;
   border: 1px solid var(--akzentfarbe1);
+  border-radius: 0.4rem;
 }
 .featurepoint {
   display: inline-block;
@@ -106,6 +127,7 @@ sup {
 fieldset {
   border: 1px solid var(--akzentfarbe3);
   margin: 0.5rem 0;
+  border-radius: 0.4rem;
 }
 .filter-div {
   margin: 0 auto;
@@ -125,6 +147,7 @@ fieldset {
   display: block;
   color: var(--schriftfarbe);
   width: 100%;
+  border-radius: 0.4rem;
 }
 .button-style:hover {
   background: var(--akzentfarbe1);
@@ -148,6 +171,7 @@ fieldset {
   background: var(--schriftfarbe);
   color: var(--seitenhintergrund);
   border: 1px solid var(--akzentfarbe3);
+  border-radius: 0.4rem;
 }
 .filter-form > fieldset {
   padding: 0 0 1rem 0;
