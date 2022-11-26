@@ -2,7 +2,7 @@
 export const getUser = async (token) => {
     try {
       const data = await fetch(`${process.env.REACT_APP_API_URL}/api/users/me`, {
-        headers: { Authorization: token }
+        headers: { "Authorization": token }
       });
       const content = await data.json();
       console.log("content 1", content)
