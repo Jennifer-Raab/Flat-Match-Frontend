@@ -97,9 +97,15 @@ header > nav > *:hover {
   font-size: 2rem;
 }
 
-.offer-detail table + div,
-.request-detail table + div {
-  margin-top: 1rem;
+.offer-detail table + p,
+.request-detail table + p, .fave {
+  margin-top: 1.5rem;
+}
+.offer-detail table + p,
+.request-detail table + p {
+  border: 1px solid var(--akzentfarbe1);
+  padding: 1.5rem;
+  border-radius: 0.4rem;
 }
 .flat-card {
   padding: 1rem;
@@ -225,7 +231,30 @@ fieldset {
 .react-slideshow-container .default-nav:first-of-type {
   left: 10px !important;
 }
-
+.fave { display: flex; }
+.fave textarea {
+  height: 64px; 
+  margin-left: 10px;
+  width: calc(100% - 110px);
+  background: var(--schriftfarbe);
+  color: var(--seitenhintergrund);
+  border: 1px solid var(--akzentfarbe3);
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+}
+.favicon {
+  background: url('graphics/flatmatch-icon-off.png') no-repeat center center var(--schriftfarbe);
+  border: 1px solid var(--akzentfarbe1);
+  width: 100px;
+  height: 64px;
+  border-radius: 0.4rem;
+}
+.favicon:hover {
+  background: url('graphics/flatmatch-icon-on.png') no-repeat center center var(--akzentfarbe1);
+}
+textarea::placeholder {
+  font-size: 75%;
+}
 @media only screen and (max-width: 480px) {
   .filter-form label,
   .filter-form input {

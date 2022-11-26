@@ -30,6 +30,9 @@ export default function Login({ isAuthenticated, setToken, setIsAuthenticated })
       };
 
       const location = useLocation();
+
+console.log("Location: ", location);
+
       const from = location.state?.from || "/";
 
   return isAuthenticated ? (

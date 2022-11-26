@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { FormatHelper } from "./HelperFunctions";
 import { client } from "./client";
 import Slideshow from "./SlideShow";
+import FavoriteSection from "./FavoriteSection";
 
-function OfferDetail() {
+function OfferDetail({ user, isAuthenticated }) {
   const [images, setImages] = useState([]);
 
   const [offer, setOffer] = useState();
@@ -100,9 +101,8 @@ function OfferDetail() {
               </tr>
             </tbody>
           </table>
-          <div>
-            Beschreibung: {FormatHelper("linebreak", offer.description)}
-          </div>
+          <p>{FormatHelper("linebreak", offer.description)}</p>
+          <FavoriteSection user={user} isAuthenticated={isAuthenticated} announcementId={id} announcementType={offer.type} />
         </div>
       )}
     </div>

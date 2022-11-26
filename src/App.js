@@ -53,14 +53,14 @@ function App() {
           <Route path="/" element={<TwoWayNav />} />
           <Route path="/angebote" element={<OfferList />} />
           <Route path="/gesuche" element={<RequestList />} />
-          <Route path="/angebot/:id" element={<OfferDetail />} />
-          <Route path="/gesuch/:id" element={<RequestDetail />} />
+          <Route path="/angebot/:id" element={<OfferDetail user={user} isAuthenticated={isAuthenticated} />} />
+          <Route path="/gesuch/:id" element={<RequestDetail user={user} isAuthenticated={isAuthenticated} />} />
           <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setToken={setToken} />} />
           <Route
             path="/nutzer"
             element={<ProtectedLayout isAuthenticated={isAuthenticated} />}
           >
-            <Route index element={<Overview user={user} isAuthenticated={isAuthenticated} />} />
+            <Route index element={<Overview user={user} />} />
             <Route path="daten" />
           </Route>
         </Routes>

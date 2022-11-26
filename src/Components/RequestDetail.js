@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FormatHelper } from "./HelperFunctions";
-import Slideshow from "./SlideShow";
 import { client } from "./client";
+import Slideshow from "./SlideShow";
+import FavoriteSection from "./FavoriteSection";
 
-function RequestDetail() {
+function RequestDetail({ user, isAuthenticated }) {
   const [request, setRequest] = useState();
   const [images, setImages] = useState([]);
   const { id } = useParams();
@@ -96,9 +97,8 @@ function RequestDetail() {
               </tr>
             </tbody>
           </table>
-          <div>
-            Beschreibung: {FormatHelper("linebreak", request.description)}
-          </div>
+          <p>{FormatHelper("linebreak", request.description)}</p>
+          <FavoriteSection user={user} isAuthenticated={isAuthenticated} announcementId={id} announcementType={request.type} />
         </div>
       )}
     </div>
