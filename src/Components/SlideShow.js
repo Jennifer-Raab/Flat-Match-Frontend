@@ -5,7 +5,7 @@ const slideImages = [];
 
 const Slideshow = ({ images }) => {
   images.fields.bilder.length &&
-    images.fields.bilder.map((image) => {
+    images.fields.bilder.forEach((image) => {
       slideImages.push({
         url: image.fields.file.url,
         caption: image.fields.title,
