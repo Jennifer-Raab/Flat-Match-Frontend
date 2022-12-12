@@ -11,15 +11,43 @@ export default function FavoriteSection({
 }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const postUrl = `${process.env.REACT_APP_API_URL}/api/favorites/create`;
+  const favUrl = `${process.env.REACT_APP_API_URL}/api/favorites/create`;
 
   const [favorite, setFavorite] = useState({});
+  const [favoriteList, setFavoriteList] = useState({});
 
   const [token, setToken] = useState();
 
   useEffect(() => {
     localStorage.getItem("token") && setToken(localStorage.getItem("token"));
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetch(`${process.env.REACT_APP_API_URL}/api/favorites/user/${user.id}`, {
+        headers: { "Authorization": token }
+      })
+        .then((response) => response.json())
+        .then((data) => setFavoriteList(data))
+        .catch((err) => console.log(err));
+    }
+  }, [user, token]);
+
+  useEffect(() => {
+
+      const found = (favoriteList.length > 0) ? favoriteList.find(favoriteListItem => favoriteListItem.announcement_id === parseInt(announcementId)) : false;
+      if (found) {
+        setFavorite({
+          user_id: found.user_id,
+          announcementId: found.announcement_id,
+          announcementType: found.type,
+          toggleFavorite: true,
+         text: found.text,
+        });
+      }
+      console.log("found", found);
+  }, [favoriteList, announcementId]);
+
 
   const favToggle = (e) => {
     favHandler(e, true);
@@ -30,9 +58,10 @@ export default function FavoriteSection({
   };
 
   const favHandler = async (e, isToggle) => {
+    e.preventDefault();
     let text = "";
     favorite.text && (text = favorite.text);
-    !isToggle && (text = e.target.favtext.value);
+    !isToggle && (text = e.target.form.favtext.value);
     if (!isAuthenticated) {
       if (
         window.confirm(
@@ -53,7 +82,7 @@ export default function FavoriteSection({
     });
 
     await axios
-      .post(postUrl, favorite, {
+      .post(favUrl, favorite, {
         headers: {
           authorization: token,
         },
@@ -64,19 +93,30 @@ export default function FavoriteSection({
       .catch((err) => {
         console.log(err);
       });
+    // const res = await fetch(
+    //   favUrl,
+    //   {
+    //     method: "POST",
+    //     mode: 'cors',
+    //     body: JSON.stringify(favorite),
+    //     headers: {
+    //       Authorization: token,
+    //      'Accept': 'application/json',
+    //      'Content-Type': 'application/json'
+    //     },
+    //   }
+    // );
   };
   return (
-    <div className="fave">
+    <form className="fave">
       <button className="favicon" onClick={favToggle}></button>
-      <form onSubmit={commentHandler}>
-        <textarea
+      <textarea
           name="favtext"
           id="favtext"
           placeholder="Möchtest Du etwas Persönliches mitteilen?"
           value={favorite.text}
         ></textarea>
-        <button type="submit">submit</button>
-      </form>
-    </div>
+        <button onClick={commentHandler}>submit</button>
+    </form>
   );
 }

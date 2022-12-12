@@ -232,6 +232,7 @@ fieldset {
   left: 10px !important;
 }
 .fave { display: flex; }
+.fave > form {}
 .fave textarea {
   height: 64px; 
   margin-left: 10px;
