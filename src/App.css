@@ -52,14 +52,14 @@ th {
   text-align: left;
   padding-right: 1rem;
 }
-header > nav { 
+header > nav {
   display: flex;
   gap: 1rem;
   font-weight: 400;
   align-items: flex-start;
- }
- header > nav > * {  
-  background:  var(--akzentfarbe1);
+}
+header > nav > * {
+  background: var(--akzentfarbe1);
   border: 1px solid var(--akzentfarbe2);
   color: var(--schriftfarbe);
   padding: 0.2rem 1rem;
@@ -67,8 +67,8 @@ header > nav {
 }
 
 header > nav > *:hover {
-  background:  var(--akzentfarbe2);
- }
+  background: var(--akzentfarbe2);
+}
 .twowaynav {
   display: flex;
   column-gap: 1rem;
@@ -98,7 +98,8 @@ header > nav > *:hover {
 }
 
 .offer-detail table + p,
-.request-detail table + p, .fave {
+.request-detail table + p,
+.fave {
   margin-top: 1.5rem;
 }
 .offer-detail table + p,
@@ -231,10 +232,13 @@ fieldset {
 .react-slideshow-container .default-nav:first-of-type {
   left: 10px !important;
 }
-.fave { display: flex; }
-.fave > form {}
+.fave {
+  display: flex;
+}
+.fave > form {
+}
 .fave textarea {
-  height: 64px; 
+  height: 64px;
   margin-left: 10px;
   width: calc(100% - 110px);
   background: var(--schriftfarbe);
@@ -244,14 +248,17 @@ fieldset {
   padding: 0.5rem;
 }
 .favicon {
-  background: url('graphics/flatmatch-icon-off.png') no-repeat center center var(--schriftfarbe);
+  background: url("graphics/flatmatch-icon-off.png") no-repeat center center
+    var(--schriftfarbe);
   border: 1px solid var(--akzentfarbe1);
   width: 100px;
   height: 64px;
   border-radius: 0.4rem;
 }
-.favicon:hover {
-  background: url('graphics/flatmatch-icon-on.png') no-repeat center center var(--akzentfarbe1);
+.favicon:hover,
+.favicon.active {
+  background: url("graphics/flatmatch-icon-on.png") no-repeat center center
+    var(--akzentfarbe1);
 }
 textarea::placeholder {
   font-size: 75%;
