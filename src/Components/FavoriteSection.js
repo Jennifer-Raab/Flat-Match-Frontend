@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import axios from "axios";
+// import axios from "axios";
 
 export default function FavoriteSection({
   user,
@@ -12,8 +12,10 @@ export default function FavoriteSection({
   const navigate = useNavigate();
   const location = useLocation();
   const favUrl = `${process.env.REACT_APP_API_URL}/api/favorites/create`;
+  const deleteUrl = `${process.env.REACT_APP_API_URL}/api/favorites/delete`;
 
   const [favorite, setFavorite] = useState({});
+  const [formularText, setFormularText] = useState("");
   const [favoriteList, setFavoriteList] = useState({});
 
   const [token, setToken] = useState();
@@ -25,7 +27,7 @@ export default function FavoriteSection({
   useEffect(() => {
     if (user) {
       fetch(`${process.env.REACT_APP_API_URL}/api/favorites/user/${user.id}`, {
-        headers: { "Authorization": token }
+        headers: { Authorization: token },
       })
         .then((response) => response.json())
         .then((data) => setFavoriteList(data))
@@ -34,20 +36,50 @@ export default function FavoriteSection({
   }, [user, token]);
 
   useEffect(() => {
-
-      const found = (favoriteList.length > 0) ? favoriteList.find(favoriteListItem => favoriteListItem.announcement_id === parseInt(announcementId)) : false;
-      if (found) {
-        setFavorite({
-          user_id: found.user_id,
-          announcementId: found.announcement_id,
-          announcementType: found.type,
-          toggleFavorite: true,
-         text: found.text,
-        });
-      }
-      console.log("found", found);
+    const found =
+      favoriteList.length > 0
+        ? favoriteList.find(
+            (favoriteListItem) =>
+              favoriteListItem.announcement_id === parseInt(announcementId)
+          )
+        : false;
+    if (found) {
+      setFavorite({
+        id: found.id,
+        user_id: found.user_id,
+        announcement_id: found.announcement_id,
+        type: found.type,
+      });
+      setFormularText(found.text);
+    }
+    console.log("found", found);
   }, [favoriteList, announcementId]);
 
+  // Delete existing Favorite
+  const favDelete = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("Favorite", favorite);
+      const res = await fetch(`${deleteUrl}/${favorite.id}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Nicht vergessen zu checken, ob den response von Fetch kein fehlerhaftes Antwort zurückgebracht hat:
+      if (!res.ok) throw new Error(`Fehler mit status code ${res.status}`);
+
+      const parseFetch = await res.json();
+      console.log("Deleted Favorite", parseFetch);
+      setFavorite({});
+      setFormularText("");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   const favToggle = (e) => {
     favHandler(e, true);
@@ -59,9 +91,6 @@ export default function FavoriteSection({
 
   const favHandler = async (e, isToggle) => {
     e.preventDefault();
-    let text = "";
-    favorite.text && (text = favorite.text);
-    !isToggle && (text = e.target.form.favtext.value);
     if (!isAuthenticated) {
       if (
         window.confirm(
@@ -73,26 +102,47 @@ export default function FavoriteSection({
       return;
     }
 
-    setFavorite({
-      user_id: user.id,
-      announcementId: announcementId,
-      announcementType: announcementType,
-      toggleFavorite: isToggle,
-      text: text,
-    });
+    // await axios
+    //   .post(favUrl, favorite, {
+    //     headers: {
+    //       authorization: token,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setFavorite(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    await axios
-      .post(favUrl, favorite, {
+    try {
+      const res = await fetch(favUrl, {
+        method: "POST",
+        mode: "cors",
         headers: {
-          authorization: token,
+          Authorization: token,
+          "Content-Type": "application/json",
         },
-      })
-      .then((res) => {
-        setFavorite(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+        body: JSON.stringify({
+          user_id: user.id,
+          announcement_id: announcementId,
+          type: announcementType,
+          text: formularText,
+        }),
       });
+
+      // Nicht vergessen zu checken, ob den response von Fetch kein fehlerhaftes Antwort zurückgebracht hat:
+      if (!res.ok) throw new Error(`Fehler mit status code ${res.status}`);
+
+      // Sonst ist es alles in Ordnung, weiter machen!
+      const parseFetch = await res.json();
+      console.log("createdFavorite", parseFetch);
+      setFavorite(parseFetch);
+    } catch (err) {
+      console.error(err.message);
+    }
+    // }
+
     // const res = await fetch(
     //   favUrl,
     //   {
@@ -109,14 +159,34 @@ export default function FavoriteSection({
   };
   return (
     <form className="fave">
-      <button className="favicon" onClick={favToggle}></button>
-      <textarea
-          name="favtext"
-          id="favtext"
-          placeholder="Möchtest Du etwas Persönliches mitteilen?"
-          value={favorite.text}
-        ></textarea>
-        <button onClick={commentHandler}>submit</button>
+      {Object.keys(favorite).length > 0 ? (
+        <>
+          <button className="favicon active" onClick={favDelete}></button>
+          <textarea
+            name="favtext"
+            id="favtext"
+            placeholder="Möchtest Du etwas Persönliches mitteilen?"
+            value={formularText}
+            onChange={(e) => {
+              setFormularText(e.target.value);
+            }}
+          ></textarea>
+          <button onClick={commentHandler}>Ändern</button>
+        </>
+      ) : (
+        <>
+          <button className="favicon" onClick={favToggle}></button>
+          <textarea
+            name="favtext"
+            id="favtext"
+            placeholder="Möchtest Du etwas Persönliches mitteilen?"
+            value={formularText}
+            onChange={(e) => {
+              setFormularText(e.target.value);
+            }}
+          ></textarea>
+        </>
+      )}
     </form>
   );
 }
