@@ -96,13 +96,6 @@ header > nav > *:hover {
   color: var(--seitenhintergrund);
 }
 
-.offer-detail h1,
-.request-detail h1 {
-  font-family: "Caveat", cursive;
-  font-weight: 200;
-  font-size: 2rem;
-}
-
 .offer-detail table + p,
 .request-detail table + p,
 .fave {
@@ -287,6 +280,7 @@ fieldset {
 .flex-3 > div > a {
   position: relative;
   display: block;
+  line-height: 0;
 }
 .flex-3 > div > a > img {
   width: 100%;
