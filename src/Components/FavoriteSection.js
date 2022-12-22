@@ -12,6 +12,7 @@ export default function FavoriteSection({
   const navigate = useNavigate();
   const location = useLocation();
   const favUrl = `${process.env.REACT_APP_API_URL}/api/favorites/create`;
+  const changeFavoriteTextUrl = `${process.env.REACT_APP_API_URL}/api/favorites/change`;
   const deleteUrl = `${process.env.REACT_APP_API_URL}/api/favorites/delete`;
 
   const [favorite, setFavorite] = useState({});
@@ -85,10 +86,31 @@ export default function FavoriteSection({
     favHandler(e, true);
   };
 
-  const commentHandler = (e) => {
-    favHandler(e, false);
+  /* Veränderung des Textes bei gesetzem Favoriten */
+  const commentHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${changeFavoriteTextUrl}/${favorite.id}`, {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: formularText,
+        }),
+      });
+      if (!res.ok) throw new Error(`Fehler mit status code ${res.status}`);
+      const parseFetch = await res.json();
+      console.log("changedFavoriteText", parseFetch[0].text);
+      setFormularText(parseFetch[0].text);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
+  /* Insert a new Favorite */
   const favHandler = async (e, isToggle) => {
     e.preventDefault();
     if (!isAuthenticated) {
@@ -136,8 +158,8 @@ export default function FavoriteSection({
 
       // Sonst ist es alles in Ordnung, weiter machen!
       const parseFetch = await res.json();
-      console.log("createdFavorite", parseFetch);
-      setFavorite(parseFetch);
+      console.log("createdFavorite", parseFetch[0]);
+      setFavorite(parseFetch[0]);
     } catch (err) {
       console.error(err.message);
     }
@@ -157,6 +179,8 @@ export default function FavoriteSection({
     //   }
     // );
   };
+  console.log("Favorite", favorite);
+  console.log("FavoriteText", favorite.id);
   return (
     <form className="fave">
       {Object.keys(favorite).length > 0 ? (
@@ -171,7 +195,9 @@ export default function FavoriteSection({
               setFormularText(e.target.value);
             }}
           ></textarea>
-          <button onClick={commentHandler}>Ändern</button>
+          <button className="change-favText" onClick={commentHandler}>
+            Ändern
+          </button>
         </>
       ) : (
         <>
