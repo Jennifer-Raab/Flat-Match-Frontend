@@ -279,10 +279,7 @@ fieldset {
 .flex-3 > div > a {
   position: relative;
   display: block;
-
-
   line-height: 0;
-
 }
 .flex-3 > div > a > img {
   width: 100%;
