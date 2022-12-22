@@ -44,6 +44,12 @@ main {
   padding: 2.5rem;
 }
 h1 {
+  font-size: 2.5rem;
+  padding-bottom: 1rem;
+  font-family: "Caveat", cursive;
+  font-weight: 200;
+}
+h2 {
   font-size: 1.5rem;
   padding-bottom: 1rem;
 }
@@ -88,13 +94,6 @@ header > nav > *:hover {
 .twowaynav > a:hover {
   background: var(--akzentfarbe1);
   color: var(--seitenhintergrund);
-}
-
-.offer-detail h1,
-.request-detail h1 {
-  font-family: "Caveat", cursive;
-  font-weight: 200;
-  font-size: 2rem;
 }
 
 .offer-detail table + p,
@@ -224,7 +223,6 @@ fieldset {
   background: #45414eaf;
   text-align: center;
 }
-
 .react-slideshow-container .default-nav:last-of-type {
   right: 10px !important;
 }
@@ -235,9 +233,7 @@ fieldset {
 .fave {
   display: flex;
 }
-.fave > form {
-}
-.fave textarea {
+#favtext {
   height: 64px;
   margin-left: 10px;
   width: calc(100% - 110px);
@@ -246,6 +242,9 @@ fieldset {
   border: 1px solid var(--akzentfarbe3);
   border-radius: 0.4rem;
   padding: 0.5rem;
+}
+.active + #favtext {
+  width: calc(100% - 220px);
 }
 .favicon {
   background: url("graphics/flatmatch-icon-off.png") no-repeat center center
@@ -259,6 +258,38 @@ fieldset {
 .favicon.active {
   background: url("graphics/flatmatch-icon-on.png") no-repeat center center
     var(--akzentfarbe1);
+}
+.change-favText {
+  border: 1px solid var(--akzentfarbe1);
+  width: 100px;
+  height: 64px;
+  border-radius: 0.4rem;
+  margin-left: 10px;
+  color: var(--schriftfarbe);
+  background-color: var(--akzentfarbe2);
+  font-weight: 400;
+}
+.flex-3 {
+  display: flex;
+  gap: 5%;
+}
+.flex-3 > div {
+  width: 30%;
+}
+.flex-3 > div > a {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+.flex-3 > div > a > img {
+  width: 100%;
+}
+.flex-3 > div > a > span {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: rgba(69, 65, 78, 0.7);
+  padding: 0.2rem 0.4rem;
 }
 textarea::placeholder {
   font-size: 75%;
