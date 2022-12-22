@@ -69,8 +69,6 @@ export default function FavoriteSection({
           "Content-Type": "application/json",
         },
       });
-
-      // Nicht vergessen zu checken, ob den response von Fetch kein fehlerhaftes Antwort zurückgebracht hat:
       if (!res.ok) throw new Error(`Fehler mit status code ${res.status}`);
 
       const parseFetch = await res.json();
