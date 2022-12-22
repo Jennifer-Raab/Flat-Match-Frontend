@@ -44,8 +44,11 @@ export default function Overview({ user }) {
               return (
                 <div key={offer.id} className="flat-card-userpage">
                   <Link to={`/angebot/${offer.id}`}>
+
+
                     <img src={slideImage.url} alt="" />
                     <span>{offer.title}</span>
+
                   </Link>
                 </div>
               );
