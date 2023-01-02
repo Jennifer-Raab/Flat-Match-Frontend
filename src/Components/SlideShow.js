@@ -4,6 +4,8 @@ import "react-slideshow-image/dist/styles.css";
 const slideImages = [];
 
 const Slideshow = ({ images }) => {
+  images &&
+  images.fields &&
   images.fields.bilder.length &&
     images.fields.bilder.forEach((image) => {
       slideImages.push({
