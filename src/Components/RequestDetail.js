@@ -98,7 +98,7 @@ function RequestDetail({ user, isAuthenticated }) {
             </tbody>
           </table>
           <p>{FormatHelper("linebreak", request.description)}</p>
-          <FavoriteSection user={user} isAuthenticated={isAuthenticated} announcementId={id} announcementType={request.type} />
+          { user && user.id !== request.creator_id ? <FavoriteSection user={user} isAuthenticated={isAuthenticated} announcementId={id} announcementType={request.type} /> : ""}
         </div>
       )}
     </div>

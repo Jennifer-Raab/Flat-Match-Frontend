@@ -260,21 +260,28 @@ fieldset {
     var(--akzentfarbe1);
 }
 .change-favText {
-  border: 1px solid var(--akzentfarbe1);
   width: 100px;
   height: 64px;
+}
+.button-2 {
+  border: 1px solid var(--akzentfarbe1);
   border-radius: 0.4rem;
   margin-left: 10px;
   color: var(--schriftfarbe);
   background-color: var(--akzentfarbe2);
   font-weight: 400;
+  padding: 0.2rem 1rem;
 }
 .flex-3 {
   display: flex;
-  gap: 5%;
+  gap: 20px 2%;
+  flex-wrap: wrap;
 }
 .flex-3 > div {
-  width: 30%;
+  width: 32%;
+}
+.flex-3:not(.opened) > div:nth-child(n+4) {
+  display: none;
 }
 .flex-3 > div > a {
   position: relative;
@@ -290,6 +297,16 @@ fieldset {
   bottom: 0;
   background: rgba(69, 65, 78, 0.7);
   padding: 0.2rem 0.4rem;
+}
+.flex-3 + button {
+  margin: 20px auto 0;
+  display: block;
+}
+.flex-3 + button:before {
+  content: "Alle anzeigen";
+}
+.flex-3.opened + button:before {
+  content: "Weniger anzeigen";
 }
 textarea::placeholder {
   font-size: 75%;

@@ -193,7 +193,7 @@ export default function FavoriteSection({
               setFormularText(e.target.value);
             }}
           ></textarea>
-          <button className="change-favText" onClick={commentHandler}>
+          <button className="change-favText button-2" onClick={commentHandler}>
             Ändern
           </button>
         </>
