@@ -64,7 +64,7 @@ header > nav {
   font-weight: 400;
   align-items: flex-start;
 }
-header > nav > * {
+.button-1 {
   background: var(--akzentfarbe1);
   border: 1px solid var(--akzentfarbe2);
   color: var(--schriftfarbe);
@@ -72,7 +72,7 @@ header > nav > * {
   border-radius: 0.4rem;
 }
 
-header > nav > *:hover {
+.button-1:hover {
   background: var(--akzentfarbe2);
 }
 .twowaynav {
@@ -279,24 +279,56 @@ fieldset {
 }
 .flex-3 > div {
   width: 32%;
-}
-.flex-3:not(.opened) > div:nth-child(n+4) {
-  display: none;
-}
-.flex-3 > div > a {
   position: relative;
   display: block;
   line-height: 0;
 }
-.flex-3 > div > a > img {
+.flex-3:not(.opened) > div:nth-child(n + 4) {
+  display: none;
+}
+
+.flex-3 > div > img {
   width: 100%;
 }
-.flex-3 > div > a > span {
+.flex-3 > div > span {
   position: absolute;
   right: 0;
   bottom: 0;
   background: rgba(69, 65, 78, 0.7);
   padding: 0.2rem 0.4rem;
+}
+
+.flex-3 > div > input:checked ~ span {
+  right: 5px;
+  bottom: 5px;
+}
+
+.flex-3 > div > a,
+.flex-3 > div > label {
+  position: absolute;
+  top: 50%;
+  opacity: 70%;
+  font-size: 1.5rem;
+  padding-top: 0.65rem;
+  left: 50%;
+  margin-top: -1.625rem;
+}
+
+.flex-3 > div > a:hover,
+.flex-3 > div > label:hover {
+  opacity: 100%;
+  background-color: var(--akzentfarbe1);
+}
+
+.flex-3 > div > a {
+  margin-left: 1.2rem;
+}
+.flex-3 > div > label {
+  margin-left: -3.2rem;
+}
+
+.flat-card-userpage > input:checked ~ img {
+  border: 5px solid var(--schriftfarbe);
 }
 .flex-3 + button {
   margin: 20px auto 0;

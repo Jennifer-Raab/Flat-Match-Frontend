@@ -8,19 +8,29 @@ function Header({ isAuthenticated, logOut }) {
         <img src={logo} alt="Flat Match" className="logo" />
       </NavLink>
       <nav>
-                { isAuthenticated ? (
-                     <>
-                      <NavLink to="/nutzer">Übersicht</NavLink>
-                      <NavLink to="/nutzer/daten">Nutzerdaten</NavLink>
-                      <span onClick={logOut}>Logout</span>
-                     </>
-                ) : (
-                    <>
-                    <NavLink to="/login">Login</NavLink>
-                    <NavLink to="/register">Registrierung</NavLink>
-                    </>
-                )}
-                </nav>
+        {isAuthenticated ? (
+          <>
+            <NavLink className="button-1" to="/nutzer">
+              Übersicht
+            </NavLink>
+            <NavLink className="button-1" to="/nutzer/daten">
+              Nutzerdaten
+            </NavLink>
+            <span className="button-1" onClick={logOut}>
+              Logout
+            </span>
+          </>
+        ) : (
+          <>
+            <NavLink className="button-1" to="/login">
+              Login
+            </NavLink>
+            <NavLink className="button-1" to="/register">
+              Registrierung
+            </NavLink>
+          </>
+        )}
+      </nav>
     </header>
   );
 }
