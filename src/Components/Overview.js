@@ -29,25 +29,32 @@ console.log("Current  u r", currentOffer, currentRequest);
   const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${API}/api/announcements/angebot/${user.id}`)
+    console.log("token", token);
+    fetch(`${API}/api/announcements/angebot/${user.id}`, {
+      headers: { Authorization: token },
+    })
       .then((response) => response.json())
       .then((data) => setOffers(data))
       .catch((err) => console.log(err));
-  }, [API, user.id]);
+  }, [API, user.id, token]);
 
   useEffect(() => {
-    fetch(`${API}/api/announcements/gesuch/${user.id}`)
+    fetch(`${API}/api/announcements/gesuch/${user.id}`, {
+      headers: { Authorization: token },
+    })
       .then((response) => response.json())
       .then((data) => setRequests(data))
       .catch((err) => console.log(err));
-  }, [API, user.id]);
+  }, [API, user.id, token]);
 
   useEffect(() => {
-    fetch(`${API}/api/favorites/matches/${user.id}`)
+    fetch(`${API}/api/favorites/matches/${user.id}`, {
+      headers: { Authorization: token },
+    })
       .then((response) => response.json())
       .then((data) => setMatches(data))
       .catch((err) => console.log(err));
-  }, [API, user.id]);
+  }, [API, user.id, token]);
 
   useEffect(() => {
     client
@@ -107,16 +114,18 @@ console.log("Current  u r", currentOffer, currentRequest);
   return (
     <div>
       <h1>Hallo {user.username}</h1>
-      {offers ? (
+      {offers && offers.length > 0 ? (
         <section>
           <h2>Eigene Angebote: {offers.length}</h2>
+      
+      {console.log("offers", offers)}
           <form name="offers" className="flex-3">
             {offers.map((offer) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              console.log("slideImage", slideImage);
+              // console.log("slideImage", slideImage);
               return (
                 <div key={offer.id} className="flat-card-userpage">
-                  <Link className="button-1" to={`/angebot/${offer.id}`}>
+                  <Link className="button-1 pos-2-2" title="Zum Angebot" to={`/angebot/${offer.id}`}>
                     <BsArrowRightSquareFill />
                   </Link>
                   { offer.id === currentOffer ? (
@@ -141,7 +150,7 @@ console.log("Current  u r", currentOffer, currentRequest);
                       )
                     }
                   
-                  <label className="button-1" htmlFor={`offer_aktiv_${offer.id}`}>
+                  <label className="button-1 pos-1-2" title="Aktives Angebot auswählen" htmlFor={`offer_aktiv_${offer.id}`}>
                     <FaFirstdraft />
                   </label>
 
@@ -152,25 +161,25 @@ console.log("Current  u r", currentOffer, currentRequest);
             })}
           </form>
           {offers.length > 3 ? (
-            <button onClick={expand} class="button-2"></button>
+            <button onClick={expand} className="button-2"></button>
           ) : (
             ""
           )}
         </section>
       ) : (
-        ""
+        "Noch keine Angebote"
       )}
 
-      {requests ? (
+      {requests && requests.length > 0 ? (
         <section>
           <h2>Eigene Gesuche: {requests.length}</h2>
           <form name="requests" className="flex-3">
             {requests.map((request) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              console.log("slideImage", slideImage);
+              // console.log("slideImage", slideImage);
               return (
                 <div key={request.id} className="flat-card-userpage">
-                  <Link className="button-1" to={`/gesuch/${request.id}`}>
+                  <Link className="button-1 pos-2-2" title="Zum Gesuch" to={`/gesuch/${request.id}`}>
                     <BsArrowRightSquareFill />
                   </Link>
                   { request.id === currentRequest ? (
@@ -195,7 +204,7 @@ console.log("Current  u r", currentOffer, currentRequest);
                       )
                     }
                   
-                  <label className="button-1" htmlFor={`request_aktiv_${request.id}`}>
+                  <label className="button-1 pos-1-2" title="Aktives Gesuch auswählen" htmlFor={`request_aktiv_${request.id}`}>
                     <FaFirstdraft />
                   </label>
 
@@ -206,13 +215,13 @@ console.log("Current  u r", currentOffer, currentRequest);
             })}
           </form>
           {requests.length > 3 ? (
-            <button onClick={expand} class="button-2"></button>
+            <button onClick={expand} className="button-2"></button>
           ) : (
             ""
           )}
         </section>
       ) : (
-        ""
+        "Noch keine Gesuche"
       )}
 
       {matches ? (
@@ -222,14 +231,33 @@ console.log("Current  u r", currentOffer, currentRequest);
           <div className="flex-3">
             {matches.map((match) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              console.log("slideImage", slideImage);
+              let slideImage2 = images.fields.bilder[2].fields.file;
+              // console.log("slideImage", slideImage);
               return (
-                <div key={match.id} className="flat-card-userpage">
-                  <Link to={`/angebot/${match.id}`}>
-                    <img src={slideImage.url} alt="" />
-                    <span>{match.title}</span>
-                    <span>{match.title}</span>
+                <div key={match.offer_id + "_" + match.request_id} className="flat-card-userpage">
+                  <Link className="button-1 pos-1-3" title="Zum Angebot" to={`/gesuch/${match.request_id}`}>
+                    <BsArrowRightSquareFill />
                   </Link>
+                  <Link className="button-1 pos-2-3" title="Zum Gesuch" to={`/angebot/${match.offer_id}`}>
+                    <BsArrowRightSquareFill />
+                  </Link>
+                  {user.id === match.offer_creator_id ? (
+                      <Link className="button-2 pos-3-3" title="Kontakt aufnehmen" to={`/kontakt/${match.request_creator_id}`}>
+                        Kontakt
+                      </Link>
+                    ) : (
+                      <Link className="button-2 pos-3-3" title="Kontakt aufnehmen" to={`/kontakt/${match.offer_creator_id}`}>
+                        Kontakt
+                      </Link>
+                    )
+                  }
+                  
+                  <div className="matchcard-image">
+                    <img src={slideImage.url} alt="" className="matchcard-image-tl" />
+                    <img src={slideImage2.url} alt="" className="matchcard-image-br" />
+                    <span>{match.offer_title}</span>
+                    <span>{match.request_title}</span>
+                  </div>
                 </div>
               );
             })}
@@ -238,10 +266,12 @@ console.log("Current  u r", currentOffer, currentRequest);
       ) : (
         ""
       )}
+
       <section>
         <h2>Geliked von</h2>
         <div className="flex-3"></div>
       </section>
+
       <section>
         <h2>Matchvorschläge</h2>
         <div className="flex-3"></div>

@@ -111,6 +111,8 @@ export default function FavoriteSection({
   /* Insert a new Favorite */
   const favHandler = async (e, isToggle) => {
     e.preventDefault();
+    const active_announcement_id = (announcementType === "angebot") ? user.active_request_id : user.active_offer_id;
+    console.log("active_announcement_id", active_announcement_id);
     if (!isAuthenticated) {
       if (
         window.confirm(
@@ -121,7 +123,14 @@ export default function FavoriteSection({
       }
       return;
     }
-
+    if (active_announcement_id === 0) {
+      if (announcementType === "angebot") {
+        alert("Um die Like Funktion zu verwenden muss zuerst ein Gesuch erstellt werden");
+      } else {
+        alert("Um die Like Funktion zu verwenden muss zuerst ein Angebot erstellt werden");
+      }
+      return;
+    }
     // await axios
     //   .post(favUrl, favorite, {
     //     headers: {
@@ -136,6 +145,7 @@ export default function FavoriteSection({
     //   });
 
     try {
+      
       const res = await fetch(favUrl, {
         method: "POST",
         mode: "cors",
@@ -145,6 +155,7 @@ export default function FavoriteSection({
         },
         body: JSON.stringify({
           user_id: user.id,
+          active_announcement_id: active_announcement_id,
           announcement_id: announcementId,
           type: announcementType,
           text: formularText,
