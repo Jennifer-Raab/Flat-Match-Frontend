@@ -98,7 +98,17 @@ function RequestDetail({ user, isAuthenticated }) {
             </tbody>
           </table>
           <p>{FormatHelper("linebreak", request.description)}</p>
-          { user && user.id !== request.creator_id ? <FavoriteSection user={user} isAuthenticated={isAuthenticated} announcementId={id} announcementType={request.type} /> : ""}
+          {user && user.id !== request.creator_id ? (
+            <FavoriteSection
+              user={user}
+              isAuthenticated={isAuthenticated}
+              announcementId={id}
+              announcementType={request.type}
+              announcement_creator_id={request.creator_id}
+            />
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>

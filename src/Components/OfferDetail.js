@@ -102,7 +102,17 @@ function OfferDetail({ user, isAuthenticated }) {
             </tbody>
           </table>
           <p>{FormatHelper("linebreak", offer.description)}</p>
-          { user && user.id !== offer.creator_id ? <FavoriteSection user={user} isAuthenticated={isAuthenticated} announcementId={id} announcementType={offer.type} /> : ""}
+          {user && user.id !== offer.creator_id ? (
+            <FavoriteSection
+              user={user}
+              isAuthenticated={isAuthenticated}
+              announcementId={id}
+              announcementType={offer.type}
+              announcement_creator_id={offer.creator_id}
+            />
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>

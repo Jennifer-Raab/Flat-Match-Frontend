@@ -64,9 +64,18 @@ header > nav {
   font-weight: 400;
   align-items: flex-start;
 }
-section + section { margin-top: 2rem; }
-
-
+section {
+  margin-top: 2rem;
+}
+button,
+label.button-style {
+  cursor: pointer;
+}
+hr {
+  margin: 1.5rem 0 0 0;
+  height: 2rem;
+  visibility: hidden;
+}
 .button-1 {
   background: var(--akzentfarbe1);
   border: 1px solid var(--akzentfarbe2);
@@ -331,6 +340,10 @@ fieldset {
   width: 8rem;
   text-align: center;
 }
+
+.pos-1-1 {
+  margin-left: -1.8125rem;
+}
 .pos-1-2 {
   margin-left: -3.95rem;
 }
@@ -343,7 +356,7 @@ fieldset {
   margin-top: -2rem !important;
 }
 .pos-2-3 {
-  margin-left:6.5rem;
+  margin-left: 6.5rem;
   margin-top: -2rem !important;
 }
 .pos-3-3 {
@@ -355,7 +368,7 @@ fieldset {
   border: 5px solid var(--schriftfarbe);
 }
 .flex-3 + button {
-  margin: 20px auto 0;
+  margin: 1.5rem auto 0;
   display: block;
 }
 .flex-3 + button:before {
@@ -374,7 +387,7 @@ textarea::placeholder {
 }
 .matchcard-image > img {
   position: absolute;
-  width: 100%; 
+  width: 100%;
 }
 .matchcard-image-tl {
   clip-path: polygon(0% 0%, 0% 100%, 100% 0%);

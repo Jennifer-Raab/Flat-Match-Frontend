@@ -8,6 +8,7 @@ export default function FavoriteSection({
   isAuthenticated,
   announcementId,
   announcementType,
+  announcement_creator_id,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -111,7 +112,10 @@ export default function FavoriteSection({
   /* Insert a new Favorite */
   const favHandler = async (e, isToggle) => {
     e.preventDefault();
-    const active_announcement_id = (announcementType === "angebot") ? user.active_request_id : user.active_offer_id;
+    const active_announcement_id =
+      announcementType === "angebot"
+        ? user.active_request_id
+        : user.active_offer_id;
     console.log("active_announcement_id", active_announcement_id);
     if (!isAuthenticated) {
       if (
@@ -125,9 +129,13 @@ export default function FavoriteSection({
     }
     if (active_announcement_id === 0) {
       if (announcementType === "angebot") {
-        alert("Um die Like Funktion zu verwenden muss zuerst ein Gesuch erstellt werden");
+        alert(
+          "Um die Like Funktion zu verwenden muss zuerst ein Gesuch erstellt werden"
+        );
       } else {
-        alert("Um die Like Funktion zu verwenden muss zuerst ein Angebot erstellt werden");
+        alert(
+          "Um die Like Funktion zu verwenden muss zuerst ein Angebot erstellt werden"
+        );
       }
       return;
     }
@@ -145,7 +153,6 @@ export default function FavoriteSection({
     //   });
 
     try {
-      
       const res = await fetch(favUrl, {
         method: "POST",
         mode: "cors",
@@ -159,6 +166,7 @@ export default function FavoriteSection({
           announcement_id: announcementId,
           type: announcementType,
           text: formularText,
+          announcement_creator_id: announcement_creator_id,
         }),
       });
 
