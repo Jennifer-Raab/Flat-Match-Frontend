@@ -50,7 +50,7 @@ function OfferDetail({ user, isAuthenticated }) {
                 <td>{offer.city}</td>
               </tr>
               <tr>
-                <th>Stadtteile:</th>
+                <th>Stadtteil:</th>
                 <td>{offer.area}</td>
               </tr>
               <tr>

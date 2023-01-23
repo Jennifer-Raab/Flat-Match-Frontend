@@ -50,11 +50,11 @@ function RequestDetail({ user, isAuthenticated }) {
                 <td>{request.area}</td>
               </tr>
               <tr>
-                <th>Miete:</th>
+                <th>Maximale Miete:</th>
                 <td>{FormatHelper("currency", request.rent)}</td>
               </tr>
               <tr>
-                <th>Kaution:</th>
+                <th>Maximale Kaution:</th>
                 <td>{FormatHelper("currency", request.deposit)}</td>
               </tr>
               <tr>
@@ -65,7 +65,7 @@ function RequestDetail({ user, isAuthenticated }) {
                 </td>
               </tr>
               <tr>
-                <th>Geeignete Personenanzahl:</th>
+                <th>Personenanzahl:</th>
                 <td>{request.number_of_persons}</td>
               </tr>
               <tr>

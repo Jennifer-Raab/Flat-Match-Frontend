@@ -76,6 +76,10 @@ hr {
   height: 2rem;
   visibility: hidden;
 }
+.radio_container {
+  text-align: center;
+  margin: 0.4rem 0 0.8rem;
+}
 .button-1 {
   background: var(--akzentfarbe1);
   border: 1px solid var(--akzentfarbe2);
@@ -191,6 +195,8 @@ fieldset {
   border: 1px solid var(--akzentfarbe3);
   border-radius: 0.4rem;
 }
+.filter-form input[type="radio"] {  margin: 0 0.7rem 0 0; width: auto; }
+.filter-form input[type="radio"] + label {  margin: 0 2rem 0 0; width: auto; }
 .filter-form > fieldset {
   padding: 0 0 1rem 0;
 }
