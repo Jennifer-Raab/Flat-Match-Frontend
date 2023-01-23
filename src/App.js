@@ -12,6 +12,7 @@ import RequestDetail from "./Components/RequestDetail";
 import Login from "./Components/Login";
 import Overview from "./Components/Overview";
 import ProtectedLayout from './Components/ProtectedLayout';
+import CreateAnnouncement from "./Components/CreateAnnouncement";
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
           >
             <Route index element={<Overview user={user} />} />
             <Route path="daten" />
+            <Route path="anzeige-erstellen" element={<CreateAnnouncement user={user} />} />
           </Route>
         </Routes>
       </main>

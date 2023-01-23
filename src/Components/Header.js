@@ -10,6 +10,9 @@ function Header({ isAuthenticated, logOut }) {
       <nav>
         {isAuthenticated ? (
           <>
+            <NavLink className="button-1" to="/nutzer/anzeige-erstellen">
+              Anzeige erstellen
+            </NavLink>
             <NavLink className="button-1" to="/nutzer">
               Übersicht
             </NavLink>

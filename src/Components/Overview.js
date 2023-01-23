@@ -15,7 +15,7 @@ export default function Overview({ user }) {
   const [currentOffer, setCurrentOffer] = useState(user.active_offer_id);
   const [currentRequest, setCurrentRequest] = useState(user.active_request_id);
 
-  console.log("Current  u r", currentOffer, currentRequest);
+ // console.log("Current u_o u_r c_o c_r", user.active_offer_id, user.active_request_id, currentOffer, currentRequest);
 
   const [token, setToken] = useState();
 
