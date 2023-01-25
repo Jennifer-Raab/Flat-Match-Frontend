@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { FormatHelper } from "./HelperFunctions";
-import { client } from "./client";
+import { FormatHelper } from "../utils/HelperFunctions";
+import { client } from "../utils/ContentfulClient";
 import Slideshow from "./SlideShow";
 import FavoriteSection from "./FavoriteSection";
 
@@ -22,18 +22,13 @@ function OfferDetail({ user, isAuthenticated }) {
 
   console.log("Images in App", images);
 
-  console.log("id:", id);
-
-  const API = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
-    fetch(`${API}/api/announcements/single/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/single/${id}`)
       .then((response) => response.json())
       .then((data) => setOffer(data))
       .catch((err) => console.log(err));
-  }, [API, id]);
+  }, [id]);
 
-  console.log(offer);
   console.log("Images", images);
   return (
     <div className="offer-detail">

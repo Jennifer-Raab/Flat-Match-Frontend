@@ -5,7 +5,6 @@ export const getUser = async (token) => {
         headers: { "Authorization": token }
       });
       const content = await data.json();
-      console.log("content 1", content)
       return { content };
     } catch (error) {
       return { error };
@@ -14,7 +13,6 @@ export const getUser = async (token) => {
   
   export const registerUser = async (formDataJson) => {
     try {
-      console.log("API", process.env.REACT_APP_API_URL);
       console.log("formDataJson", formDataJson);
       const data = await fetch(
         `${process.env.REACT_APP_API_URL}/users`, {
@@ -27,7 +25,7 @@ export const getUser = async (token) => {
         }
       );
       const content = await data.json();
-      console.log("content 2", content)
+      console.log("content", content)
       return { content };
     } catch (error) {
       return { error };
@@ -36,7 +34,6 @@ export const getUser = async (token) => {
   
   export const updateUser = async (formDataJson) => {
     try {
-      console.log("API", `${process.env.REACT_APP_API_URL}/users/${JSON.parse(formDataJson).id}`);
       console.log("formDataJson", formDataJson);
       const data = await fetch(
         `${process.env.REACT_APP_API_URL}/users/${JSON.parse(formDataJson).id}`, {
@@ -49,7 +46,6 @@ export const getUser = async (token) => {
         }
       );
       const content = await data.json();
-      console.log("content 3", content)
       return { content };
     } catch (error) {
       return { error };
@@ -69,7 +65,6 @@ export const getUser = async (token) => {
         }
       );
       const content = await data.json();
-      console.log("content", content)
       return { content };
     } catch (error) {
       return { error };
