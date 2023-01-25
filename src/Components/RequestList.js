@@ -5,16 +5,12 @@ import FilterForm from "./FilterForm";
 function RequestList() {
   const [requests, setRequests] = useState();
 
-  const API = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
-    fetch(`${API}/api/announcements/gesuch`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/gesuch`)
       .then((response) => response.json())
       .then((data) => setRequests(data))
       .catch((err) => console.log(err));
-  }, [API]);
-
-  console.log(requests);
+  }, []);
 
   return (
     <>

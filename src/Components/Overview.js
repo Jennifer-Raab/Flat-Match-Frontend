@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaFirstdraft } from "react-icons/fa";
 import { BsArrowRightSquareFill } from "react-icons/bs";
-import { client } from "./client";
+import { client } from "../utils/ContentfulClient";
 
 export default function Overview({ user }) {
   const currentAnnouncementUrl = `${process.env.REACT_APP_API_URL}/api/users/current`;
@@ -15,8 +15,6 @@ export default function Overview({ user }) {
   const [currentOffer, setCurrentOffer] = useState(user.active_offer_id);
   const [currentRequest, setCurrentRequest] = useState(user.active_request_id);
 
- // console.log("Current u_o u_r c_o c_r", user.active_offer_id, user.active_request_id, currentOffer, currentRequest);
-
   const [token, setToken] = useState();
 
   useEffect(() => {
@@ -27,53 +25,51 @@ export default function Overview({ user }) {
   // const [liked, setLiked] = useState();
   // const [suggestions, setSuggestions] = useState();
 
-  const API = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
     console.log("token", token);
-    fetch(`${API}/api/announcements/angebot/${user.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/angebot/${user.id}`, {
       headers: { Authorization: token },
     })
       .then((response) => response.json())
       .then((data) => setOffers(data))
       .catch((err) => console.log(err));
-  }, [API, user.id, token]);
+  }, [user.id, token]);
 
   useEffect(() => {
-    fetch(`${API}/api/announcements/gesuch/${user.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/gesuch/${user.id}`, {
       headers: { Authorization: token },
     })
       .then((response) => response.json())
       .then((data) => setRequests(data))
       .catch((err) => console.log(err));
-  }, [API, user.id, token]);
+  }, [user.id, token]);
 
   useEffect(() => {
-    fetch(`${API}/api/favorites/matches/${user.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/favorites/matches/${user.id}`, {
       headers: { Authorization: token },
     })
       .then((response) => response.json())
       .then((data) => setMatches(data))
       .catch((err) => console.log(err));
-  }, [API, user.id, token]);
+  }, [user.id, token]);
 
   useEffect(() => {
-    fetch(`${API}/api/announcements/liked/gesuch/${user.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/liked/gesuch/${user.id}`, {
       headers: { Authorization: token },
     })
       .then((response) => response.json())
       .then((data) => setLikedOffers(data))
       .catch((err) => console.log(err));
-  }, [API, user.id, token]);
+  }, [user.id, token]);
 
   useEffect(() => {
-    fetch(`${API}/api/announcements/liked/angebot/${user.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/liked/angebot/${user.id}`, {
       headers: { Authorization: token },
     })
       .then((response) => response.json())
       .then((data) => setLikedRequests(data))
       .catch((err) => console.log(err));
-  }, [API, user.id, token]);
+  }, [user.id, token]);
 
   useEffect(() => {
     client
@@ -147,7 +143,6 @@ export default function Overview({ user }) {
           <form name="offers" className="flex-3">
             {offers.map((offer) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              // console.log("slideImage", slideImage);
               return (
                 <div key={offer.id} className="flat-card-userpage">
                   <Link
@@ -208,7 +203,6 @@ export default function Overview({ user }) {
           <form name="requests" className="flex-3">
             {requests.map((request) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              // console.log("slideImage", slideImage);
               return (
                 <div key={request.id} className="flat-card-userpage">
                   <Link
@@ -271,7 +265,6 @@ export default function Overview({ user }) {
             {matches.map((match) => {
               let slideImage = images.fields.bilder[0].fields.file;
               let slideImage2 = images.fields.bilder[2].fields.file;
-              // console.log("slideImage", slideImage);
               return (
                 <div
                   key={match.offer_id + "_" + match.request_id}
@@ -348,7 +341,6 @@ export default function Overview({ user }) {
           <div className="flex-3">
             {likedOffers.map((likedOffer) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              // console.log("slideImage", slideImage);
               return (
                 <div key={likedOffer.id} className="flat-card-userpage">
                   <Link
@@ -386,7 +378,6 @@ export default function Overview({ user }) {
           <div className="flex-3">
             {likedRequests.map((likedRequest) => {
               let slideImage = images.fields.bilder[0].fields.file;
-              // console.log("slideImage", slideImage);
               return (
                 <div key={likedRequest.id} className="flat-card-userpage">
                   <Link

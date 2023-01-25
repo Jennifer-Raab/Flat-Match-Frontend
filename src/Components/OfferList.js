@@ -5,16 +5,12 @@ import FilterForm from "./FilterForm";
 function OfferList() {
   const [offers, setOffers] = useState();
 
-  const API = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
-    fetch(`${API}/api/announcements/angebot`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/announcements/angebot`)
       .then((response) => response.json())
       .then((data) => setOffers(data))
       .catch((err) => console.log(err));
-  }, [API]);
-
-  console.log(offers);
+  }, []);
 
   return (
     <>

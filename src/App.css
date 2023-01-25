@@ -219,23 +219,12 @@ fieldset {
   height: 50vw;
   background-position: center;
 }
-
 .request-detail .slide-container {
   max-width: 400px;
 }
 .request-detail .each-slide-effect > div {
   height: 50vw;
 }
-
-.each-slide-effect > div {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  background-size: cover;
-  height: 50vw;
-  background-position: center;
-}
-
 .each-slide-effect span {
   padding: 0.5rem;
   background: #45414eaf;
